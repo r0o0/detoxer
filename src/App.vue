@@ -1,11 +1,15 @@
 <template lang="pug">
   div#app
-    router-view
+    el-container
+      el-header Header
+      router-view
+      el-footer Footer
 </template>
 
 <style lang="scss">
+@import "./assets/sass/App";
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -20,5 +24,8 @@
       color: #42b983;
     }
   }
+}
+.c-container {
+  background: rgba(pink, 0.5);
 }
 </style>

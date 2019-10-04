@@ -1,5 +1,10 @@
-<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+<template lang="pug">
+  .about
+    el-container.c-container
+      el-main.c-main 리스트
 </template>
+
+<style lang="scss">
+.about {
+}
+</style>
