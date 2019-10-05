@@ -13,7 +13,7 @@ export default {
   mounted () {
     const uiConfig = {
       signInFlow: 'popup',
-      signInSuccessUrl: '<url-to-redirect-to-on-success>',
+      signInSuccessUrl: this.$router.history.current.path,
       signInOptions: [
         {
           provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -30,6 +30,7 @@ export default {
         signInFailure: function (error) {
           // For merge conflicts, the error.code will be
           // 'firebaseui/anonymous-upgrade-merge-conflict'.
+          console.log('signin error', error);
           if (error.code !== 'firebaseui/anonymous-upgrade-merge-conflict') {
             return Promise.resolve()
           }
