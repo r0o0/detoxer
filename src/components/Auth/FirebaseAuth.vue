@@ -30,7 +30,7 @@ export default {
         signInFailure: function (error) {
           // For merge conflicts, the error.code will be
           // 'firebaseui/anonymous-upgrade-merge-conflict'.
-          console.log('signin error', error);
+          console.log('signin error', error)
           if (error.code !== 'firebaseui/anonymous-upgrade-merge-conflict') {
             return Promise.resolve()
           }
