@@ -1,5 +1,5 @@
 <template lang="pug">
-  div#firebaseui-auth-container
+  #firebaseui-auth-container
 </template>
 
 <script>

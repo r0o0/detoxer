@@ -1,19 +1,20 @@
 <template lang="pug">
-  el-dialog(
-    title="회원가입"
-    :visible.sync="showDialog"
-  )
-    div
-      el-form(:model="emailAuth" :rules="rules" ref="emailAuth")
-        el-form-item(label="이메일" prop="email")
-          el-input(placeholder="gildong@detoxer.com" v-model="emailAuth.email")
-        el-form-item(label="비밀번호" prop="password")
-          el-input(type="password" autocomplete="off" v-model="emailAuth.password")
-        el-form-item
-          el-button(type="primary" @click="authenticate('emailAuth')") 회원가입
-          el-button(plain @click="showDialog=false") 취소
-      span 이미 회원이신가요? 로그인
-    FirebaseAuth
+  .auth
+    el-dialog(
+      title="회원가입"
+      :visible.sync="showDialog"
+    )
+      div
+        el-form(:model="emailAuth" :rules="rules" ref="emailAuth")
+          el-form-item(label="이메일" prop="email")
+            el-input(placeholder="gildong@detoxer.com" v-model="emailAuth.email")
+          el-form-item(label="비밀번호" prop="password")
+            el-input(type="password" autocomplete="off" v-model="emailAuth.password")
+          el-form-item
+            el-button(type="primary" @click="authenticate('emailAuth')") 회원가입
+            el-button(plain @click="showDialog=false") 취소
+        span 이미 회원이신가요? 로그인
+      FirebaseAuth
 </template>
 
 <script>

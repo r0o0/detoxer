@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.mypage-menu
+  .mypage-menu
     el-menu(
       default-active="1"
       @open="handleOpen"

@@ -1,5 +1,5 @@
 <template lang="pug">
-  el-container.c-container.list
+  .list
     el-main.c-main 리스트
 </template>
 

@@ -1,9 +1,8 @@
 <template lang="pug">
-  div#app
-    el-container
-      el-header Header
-      router-view
-      el-footer Footer
+  #app
+    el-header header
+    router-view
+    el-footer Footer
 </template>
 
 <style lang="scss">
