@@ -99,7 +99,7 @@
         template(slot-scope="scope")
           el-button(icon="el-icon-edit" circle)
           el-button(icon="el-icon-delete" circle)
-    el-button 상품 등록
+    el-button(@click="gotoWrite") 상품 등록
 </template>
 
 <script>
@@ -216,6 +216,11 @@ export default {
           ]
         }
       ]
+    }
+  },
+  methods: {
+    gotoWrite () {
+      this.$router.push({ path: 'write' })
     }
   }
 }
