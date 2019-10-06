@@ -27,8 +27,8 @@ export default {
     const isEmailValid = (rule, value, callback) => {
       const validateEmail = (value) => {
         /* eslint-disable no-useless-escape */
-        const checkEmailForm = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return checkEmailForm.test(value)
+        const checkEmailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        return checkEmailRegex.test(value)
       }
       if (!validateEmail(value)) callback(new Error('올바른 이메일 주소를 입력해주세요.'))
       callback()
@@ -44,10 +44,10 @@ export default {
         return `비밀번호에 ${type} 넣어 더욱 강력한 비밀번호를 만들어보세요.`
       }
       if (!isLowercase.test(value)) callback(new Error(baseMsg('소문자')))
-      if(!isUppercase.test(value)) callback(new Error(baseMsg('대문자')))
-      if(!isNumber.test(value)) callback(new Error(baseMsg('숫자')))
-      if(!isSpecial.test(value)) callback(new Error(baseMsg('특수 기호 !@#$%&')))
-      if(value.length < 8) callback(new Error('비밀번호는 8자 이상이어야 합니다.'))
+      if (!isUppercase.test(value)) callback(new Error(baseMsg('대문자')))
+      if (!isNumber.test(value)) callback(new Error(baseMsg('숫자')))
+      if (!isSpecial.test(value)) callback(new Error(baseMsg('특수 기호 !@#$%&')))
+      if (value.length < 8) callback(new Error('비밀번호는 8자 이상이어야 합니다.'))
       callback()
     }
     return {
