@@ -39,7 +39,7 @@ export default {
       const isLowercase = /^(?=.*[a-z])/ // 문자열에 소문자가 한개라고 들어가야 함
       const isUppercase = /^(?=.*[A-Z])/ // 문자열에 대문자가 한개라도 들어가야 함
       const isNumber = /^(?=.*[0-9])/ // 문자열에 숫자가 한개라도 들어가야함
-      const isSpecial = /^(?=.*[!@#\$%\^&\*])/ // 문자열에 특수기호 !,@,#,$,%,&,중 한개라도 들어가야함
+      const isSpecial = /^(?=.*[!@#~\$%\^&\*])/ // 문자열에 특수기호 !,@,#,$,%,&,중 한개라도 들어가야함
       const baseMsg = (type) => {
         return `비밀번호에 ${type} 넣어 더욱 강력한 비밀번호를 만들어보세요.`
       }
