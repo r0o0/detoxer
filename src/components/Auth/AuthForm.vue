@@ -8,17 +8,18 @@
       show-close
       :before-close="closeDialog"
     )
-      div
-        el-form(:model="emailAuth" :rules="rules" ref="emailAuth")
-          el-form-item(label="이메일" prop="email")
-            el-input(placeholder="gildong@detoxer.com" v-model="emailAuth.email")
-          el-form-item(label="비밀번호" prop="password")
-            el-input(type="password" autocomplete="off" v-model="emailAuth.password")
-          el-form-item
-            el-button(type="primary" @click="authenticate('emailAuth')") 회원가입
-            el-button(plain @click="showDialog=false") 취소
-        span 이미 회원이신가요? 로그인
-      FirebaseAuth
+      .auth-content
+        .auth-email
+          el-form(:model="emailAuth" :rules="rules" ref="emailAuth")
+            el-form-item(label="이메일" prop="email")
+              el-input(placeholder="gildong@detoxer.com" v-model="emailAuth.email")
+            el-form-item(label="비밀번호" prop="password")
+              el-input(type="password" autocomplete="off" v-model="emailAuth.password")
+            el-form-item
+              el-button(type="primary" @click="authenticate('emailAuth')") 회원가입
+              el-button(plain @click="showDialog=false") 취소
+          span 이미 회원이신가요? 로그인
+        FirebaseAuth
 </template>
 
 <script>
@@ -127,3 +128,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.auth-content {
+  display: flex;
+  flex-flow: column wrap;
+  .auth-email {
+    order: 3;
+    width: 220px;
+    margin: 0 auto;
+  }
+}
+</style>
