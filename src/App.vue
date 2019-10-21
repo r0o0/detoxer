@@ -1,12 +1,32 @@
 <template lang="pug">
   #app
-    el-header header
+    el-header(height="inherit")
+      CHeader
+    CAuthForm
     router-view
     el-footer Footer
 </template>
 
+<script>
+import CHeader from '@/components/Header/Header'
+import CAuthForm from '@/components/Auth/AuthForm'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('dialog')
+
+export default {
+  components: {
+    CHeader,
+    CAuthForm
+  },
+  computed: {
+    ...mapGetters(['getTrigger'])
+  }
+}
+</script>
+
 <style lang="scss">
 @import "./assets/sass/App";
+@import "./assets/sass/els/common";
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
