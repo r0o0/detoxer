@@ -1,0 +1,14 @@
+// el element의 header main footer와 같은 common으로 들어갈 만한 요소들의 모음
+@import '../partials/mixin';
+
+#app {
+  .el-header, .el-footer {
+    padding: 0 16px;
+    @include tablet {
+      padding: 0 40px;
+    }
+    @include desktop {
+      padding: 0 80px;
+    }
+  }
+}

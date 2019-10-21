@@ -3,6 +3,10 @@
     el-dialog(
       title="회원가입"
       :visible.sync="showDialog"
+      close-on-click-modal
+      close-on-press-escape
+      show-close
+      :before-close="closeDialog"
     )
       div
         el-form(:model="emailAuth" :rules="rules" ref="emailAuth")
@@ -21,6 +25,8 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import FirebaseAuth from './FirebaseAuth'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters, mapActions } = createNamespacedHelpers('dialog')
 
 export default {
   name: 'AuthForm',
@@ -52,7 +58,7 @@ export default {
       callback()
     }
     return {
-      showDialog: true,
+      showDialog: false,
       emailAuth: {
         email: null,
         password: null
@@ -73,6 +79,7 @@ export default {
     FirebaseAuth
   },
   methods: {
+    ...mapActions(['setTrigger']),
     authenticate (formName) {
       console.log('click authenticate')
       this.$refs[formName].validate((valid) => {
@@ -89,9 +96,13 @@ export default {
           return false
         }
       })
+    },
+    closeDialog () {
+      this.setTrigger(false)
     }
   },
   computed: {
+    ...mapGetters(['getTrigger']),
     emailValue: {
       set (value) {
         this.email = value
@@ -107,6 +118,11 @@ export default {
       get () {
         return this.password
       }
+    }
+  },
+  watch: {
+    getTrigger: function (newProp, prevProp) {
+      this.showDialog = newProp
     }
   }
 }
