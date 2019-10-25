@@ -7,13 +7,18 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions } = createNamespacedHelpers('dialog')
 
 export default {
   name: 'FirebaseAuth',
+  methods: {
+    ...mapActions(['setTrigger'])
+  },
   mounted () {
     const uiConfig = {
       signInFlow: 'popup',
-      signInSuccessUrl: this.$router.history.current.path,
+      // signInSuccessUrl: this.$router.history.current.path,
       signInOptions: [
         {
           provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -24,8 +29,8 @@ export default {
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
       ],
       callbacks: {
-        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-          return true
+        signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+          if (authResult) this.setTrigger(false)
         },
         signInFailure: function (error) {
           // For merge conflicts, the error.code will be
