@@ -27,34 +27,6 @@ new Vue({
   created () {
     firebase.initializeApp(firebaseConfig)
     firebase.analytics()
-    // firebase.auth().onAuthStateChanged(user => {
-    //   if (user) {
-    //     const {
-    //       displayName,
-    //       email,
-    //       emailVerified,
-    //       uid,
-    //       isAnonymous
-    //     } = user
-
-    //     user.getIdToken().then(accessToken => {
-    //       console.log('accessToken', accessToken)
-    //       const token = getCookie('token')
-    //       if (!token) console.log('no token')
-    //       let userPayload = {
-    //         role: 'user',
-    //         displayName,
-    //         email,
-    //         emailVerified,
-    //         uid,
-    //         isAnonymous
-    //         // accessToken
-    //       }
-    //       if (isAnonymous) userPayload = { ...userPayload, role: 'guest' }
-    //       this.setUser(userPayload)
-    //     }, null, ' ')
-    //   }
-    // })
   },
   mounted () {
     firebase.auth().onAuthStateChanged(user => {
