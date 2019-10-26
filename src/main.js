@@ -8,6 +8,8 @@ import { firebaseConfig } from './firebase.config'
 // Element UI
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// Utils
+import { isCookieExist, setCookie } from './utils/cookies'
 // Vuex
 import { createNamespacedHelpers } from 'vuex'
 const { mapActions } = createNamespacedHelpers('auth')
@@ -25,6 +27,34 @@ new Vue({
   created () {
     firebase.initializeApp(firebaseConfig)
     firebase.analytics()
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+    //     const {
+    //       displayName,
+    //       email,
+    //       emailVerified,
+    //       uid,
+    //       isAnonymous
+    //     } = user
+
+    //     user.getIdToken().then(accessToken => {
+    //       console.log('accessToken', accessToken)
+    //       const token = getCookie('token')
+    //       if (!token) console.log('no token')
+    //       let userPayload = {
+    //         role: 'user',
+    //         displayName,
+    //         email,
+    //         emailVerified,
+    //         uid,
+    //         isAnonymous
+    //         // accessToken
+    //       }
+    //       if (isAnonymous) userPayload = { ...userPayload, role: 'guest' }
+    //       this.setUser(userPayload)
+    //     }, null, ' ')
+    //   }
+    // })
   },
   mounted () {
     firebase.auth().onAuthStateChanged(user => {
@@ -38,17 +68,24 @@ new Vue({
         } = user
 
         user.getIdToken().then(accessToken => {
-          console.log('accessToken', accessToken)
+          let name = displayName
+          if (!name) name = '고객님'
+
+          const user = isCookieExist('user')
+          if (!user) setCookie('user', name, 30)
+
           let userPayload = {
             role: 'user',
-            displayName,
+            name,
             email,
             emailVerified,
             uid,
             isAnonymous,
             accessToken
           }
+
           if (isAnonymous) userPayload = { ...userPayload, role: 'guest' }
+
           this.setUser(userPayload)
         }, null, ' ')
       }
