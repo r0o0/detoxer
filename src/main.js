@@ -9,10 +9,10 @@ import { firebaseConfig } from './firebase.config'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // Utils
-import { isCookieExist, setCookie } from './utils/cookies'
+import { isCookieExist, setCookie, deleteCookie } from './utils/cookies'
 // Vuex
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions } = createNamespacedHelpers('auth')
+const { mapGetters, mapActions } = createNamespacedHelpers('auth')
 
 Vue.config.productionTip = false
 
@@ -21,6 +21,9 @@ Vue.use(ElementUI)
 new Vue({
   router,
   store,
+  computed: {
+    ...mapGetters(['getRequestSignout'])
+  },
   methods: {
     ...mapActions(['setUser'])
   },
@@ -30,6 +33,7 @@ new Vue({
   },
   mounted () {
     firebase.auth().onAuthStateChanged(user => {
+      if (!user) this.setUser(null)
       if (user) {
         const {
           displayName,
@@ -62,6 +66,14 @@ new Vue({
         }, null, ' ')
       }
     })
+  },
+  watch: {
+    getRequestSignout () {
+      if (this.getRequestSignout) {
+        firebase.auth().signOut()
+        deleteCookie('user')
+      }
+    }
   },
   render: h => h(App)
 }).$mount('#app')

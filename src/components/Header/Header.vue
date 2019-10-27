@@ -12,14 +12,18 @@
       div.header-right
         CSearch
         i.el-icon-shopping-cart-2.i-cart
-        el-button(plain @click="triggerDialog") 회원가입
+        el-button(v-if="!isUser" plain @click="triggerDialog") 회원가입
+        CUserNav(v-else v-bind:role="isUser.role" v-bind:name="isUser.name")
 </template>
 
 <script>
 import CNav from './Nav'
 import CSearch from './Search'
 import CAuthForm from '@/components/Auth/AuthForm'
+import CUserNav from '@/components/User/UserNav'
+import { isCookieExist, getCookie } from '@/utils/cookies'
 import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth')
 const { mapActions } = createNamespacedHelpers('dialog')
 
 export default {
@@ -27,12 +31,33 @@ export default {
   components: {
     CNav,
     CSearch,
-    CAuthForm
+    CAuthForm,
+    CUserNav
   },
   data () {
     return {
       input: '',
-      width: 0
+      width: 0,
+      user: null
+    }
+  },
+  computed: {
+    ...mapGetters(['getUser']),
+    isUser () {
+      const userExist = isCookieExist('user')
+      const name = decodeURIComponent(getCookie('user'))
+      if (userExist) this.user = { name }
+      if (this.getUser) {
+        this.user = {
+          ...this.getUser
+        }
+      }
+      return this.user
+    }
+  },
+  watch: {
+    getUser () {
+      if (!this.getUser) this.user = null
     }
   },
   methods: {
