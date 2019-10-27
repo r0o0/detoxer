@@ -8,15 +8,31 @@ import 'firebase/auth'
 import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions } = createNamespacedHelpers('dialog')
+const { mapActions, mapGetters } = createNamespacedHelpers('dialog')
 
 export default {
   name: 'FirebaseAuth',
+  data () {
+    return {
+      uiConfig: null,
+      authenticator: null
+    }
+  },
+  computed: {
+    ...mapGetters(['getTrigger'])
+  },
   methods: {
     ...mapActions(['setTrigger'])
   },
+  watch: {
+    getTrigger () {
+      if (this.getTrigger)
+        this.authenticator.reset()
+        this.authenticator.start('#firebaseui-auth-container', this.uiConfig)
+    }
+  },
   mounted () {
-    const uiConfig = {
+    this.uiConfig = {
       signInFlow: 'popup',
       // signInSuccessUrl: this.$router.history.current.path,
       signInOptions: [
@@ -46,7 +62,8 @@ export default {
       }
     }
     const ui = new firebaseui.auth.AuthUI(firebase.auth())
-    ui.start('#firebaseui-auth-container', uiConfig)
+    this.authenticator = ui
+    ui.start('#firebaseui-auth-container', this.uiConfig)
   }
 }
 </script>
