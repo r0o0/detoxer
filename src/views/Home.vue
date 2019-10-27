@@ -1,7 +1,48 @@
 <template lang="pug">
   .home
-    img(alt="Vue logo" src="../assets/logo.png")
-    HelloWorld(msg="Welcome to Your Vue.js App")
+    .carousel carousel 들어갈 예정
+    .list
+      h1 Best Seller
+      .cover.layout-2
+        div(v-for="(list, index) in lists.best" :key="index")
+          a(:to="list.link")
+          figure
+            img(:alt="list.title" :src="list.url")
+            figcaption.w
+              div
+                h1 {{list.title}}
+                a(:to="list.link") more
+    .banner
+      .cover
+        a(:to="lists.banner.link")
+        figure
+          img(:alt="lists.banner.title" :src="lists.banner.url")
+          figcaption.w
+            div
+              h1 {{lists.banner.title}}
+              p {{lists.banner.text}}
+              a(:to="lists.banner.link") more
+    .list
+      h1 Trending Seller
+      .cover.layout-2
+        div(v-for="(list, index) in lists.trending" :key="index")
+          a(:to="list.link")
+          figure
+            img(:alt="list.title" :src="list.url")
+            figcaption.w
+              div
+                h1 {{list.title}}
+                a(:to="list.link") more
+    .list
+      h1 Event
+      .cover.layout-3
+        div(v-for="(list, index) in lists.event" :key="index")
+          a(:to="list.link")
+          figure
+            img(:alt="list.title" :src="list.url")
+            figcaption
+              div
+                h1 {{list.title}}
 </template>
 
 <script>
@@ -10,8 +51,267 @@ import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'home',
+  data () {
+    return {
+      lists: {
+        banner: {
+          link: '',
+          url: 'https://images.unsplash.com/photo-1498603911539-01ce6c9ad8f5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+          title: 'The Latest Bras and Tights',
+          text: 'ZoomX Vaporfly NEXT%—now in ‘Pink Blast.‘'
+        },
+        best: [
+          {
+            link: '',
+            url: 'https://images.unsplash.com/photo-1534336810865-0beae4c81278?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+            title: 'The Latest Bras and Tights'
+          },
+          {
+            link: '',
+            url: 'https://images.unsplash.com/photo-1560526860-1f0e56046c85?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+            title: 'The Latest Bras and Tights'
+          }
+        ],
+        trending: [
+          {
+            link: '',
+            url: 'https://images.unsplash.com/photo-1551040078-5a2f375f9549?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2700&q=80',
+            title: 'The Latest Bras and Tights'
+          },
+          {
+            link: '',
+            url: 'https://images.unsplash.com/photo-1528556860752-2a6a19a285a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+            title: 'The Latest Bras and Tights'
+          }
+        ],
+        event: [
+          {
+            link: '',
+            url: 'https://images.unsplash.com/photo-1551040078-5a2f375f9549?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2700&q=80',
+            title: 'The Latest Bras and Tights'
+          },
+          {
+            link: '',
+            url: 'https://images.unsplash.com/photo-1570696516188-ade861b84a49?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2700&q=80',
+            title: 'The Latest Bras and Tights'
+          },
+          {
+            link: '',
+            url: 'https://images.unsplash.com/photo-1528556860752-2a6a19a285a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+            title: 'The Latest Bras and Tights'
+          }
+        ]
+      }
+    }
+  },
   components: {
     HelloWorld
+  },
+  mounted () {
+    const imgs = this.$el.querySelectorAll('img')
+    imgs.forEach(img => {
+      if (img.clientWidth > img.clientHeight) {
+        img.className += 'width-bigger'
+      }
+    })
   }
 }
 </script>
+
+<style lang="scss" scope>
+.carousel {
+  height: 700px;
+  background: pink;
+}
+
+.list,
+.banner {
+  margin-top: 40px;
+  >h1 {
+    color: #111;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+}
+
+.banner:first-of-type {
+  margin-top: 0;
+}
+
+.list {
+  .cover {
+    display: flex;
+    >div {
+      position: relative;
+      overflow: hidden;
+      margin-left: 5px;
+      margin-right: 5px;
+      &:first-of-type {
+        margin-left: 0;
+        margin-right: 10px;
+      }
+      &:last-of-type {
+        margin-left: 10px;
+        margin-right: 0;
+      }
+      >a {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        display: block;
+      }
+    }
+    &.layout-2 {
+      >div {
+        width: calc(50% - 10px);
+        figure {
+          position: relative;
+          figcaption {
+            position: absolute;
+            left: 48px;
+            top: calc(66.66667% - 48px);
+            display: flex;
+            align-items: flex-end;
+            width: 75%;
+            height: 33.33333%;
+            text-align: left;
+            padding: 20px;
+          }
+        }
+      }
+    }
+    &.layout-3 {
+      >div {
+        width: calc(33.33% - 10px);
+        figure {
+          img {
+            max-height: 650px;
+          }
+        }
+      }
+    }
+    &.layout-4 {
+      >div {
+        width: calc(25% - 10px);
+      }
+    }
+    figure {
+      height: 700px;
+      img {
+        width: 100%;
+        height: auto;
+        &.width-bigger {
+          width: auto;
+          height: 100%;
+        }
+      }
+      figcaption {
+        h1 {
+          text-align: left;
+          font-weight: bold;
+          font-size: 24px;
+          color: #111;
+        }
+        a {
+          display: inline-block;
+          margin-top: 10px;
+          padding: 8px 28px;
+          border-radius: 20px;
+          background: #111;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &.w {
+          h1 {
+            color: #fff;
+          }
+          a {
+            background: #fff;
+            color: #111;
+          }
+        }
+      }
+    }
+  }
+}
+
+.banner {
+  position: relative;
+  overflow: hidden;
+  height: 240px;
+  .cover {
+    >a {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      display: block;
+    }
+    figure {
+      position: relative;
+      img {
+        width: auto;
+        height: 100%;
+        &.width-bigger {
+          width: 100%;
+          height: auto;
+        }
+      }
+      figcaption {
+        position: absolute;
+        left: 48px;
+        top: 48px;
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        text-align: left;
+        padding: 20px;
+        h1 {
+          text-align: left;
+          font-weight: bold;
+          font-size: 48px;
+          color: #111;
+          text-transform: uppercase;
+          line-height: 1;
+        }
+        p {
+          margin: 10px 0;
+          color: #111;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        a {
+          display: inline-block;
+          margin-top: 10px;
+          padding: 8px 28px;
+          border-radius: 20px;
+          background: #111;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &.w {
+          h1 {
+            color: #fff;
+          }
+          p {
+            color: #fff;
+          }
+          a {
+            background: #fff;
+            color: #111;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

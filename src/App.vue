@@ -3,7 +3,8 @@
     el-header(height="inherit")
       CHeader
     CAuthForm
-    router-view
+    main
+      router-view
     el-footer Footer
 </template>
 
@@ -33,6 +34,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  main {
+    margin: 0 auto;
+    padding: 0 16px;
+    @include desktop {
+      max-width: 1920px;
+      padding: 0 80px;
+    }
+    @include tablet {
+      padding: 0 40px;
+    }
+  }
 }
 #nav {
   padding: 30px;
@@ -47,4 +59,5 @@ export default {
 .c-container {
   background: rgba(pink, 0.5);
 }
+
 </style>
