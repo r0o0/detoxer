@@ -1,25 +1,24 @@
 <template lang="pug">
   .banner
     .cover
-      a(:to="data.link")
+      a(v-bind:to="data.link")
       figure
-        img(:alt="data.title" :src="data.url")
+        img(v-bind:alt="data.title" v-bind:src="data.url")
         figcaption.w
           div
             h1 {{data.title}}
             p {{data.text}}
-            a(:to="data.link") more
+            a(v-bind:to="data.link") more
 </template>
 
 <script>
 export default {
-  name: 'Banner',
+  name: "Banner",
   props: {
-    data: Object,
+    data: Object
   },
-  data () {
-    return {
-    }
+  data() {
+    return {};
   }
   // created () {
   //   const imgs = this.$el.querySelectorAll('img')
@@ -29,19 +28,13 @@ export default {
   //     }
   //   })
   // }
-}
+};
 </script>
 
 <style lang="scss" scope>
-.carousel {
-  height: 700px;
-  background: pink;
-}
-
-.list,
 .banner {
   margin-top: 40px;
-  >h1 {
+  > h1 {
     color: #111;
     font-size: 24px;
     font-weight: bold;
@@ -54,113 +47,12 @@ export default {
   margin-top: 0;
 }
 
-.list {
-  .cover {
-    display: flex;
-    >div {
-      position: relative;
-      overflow: hidden;
-      margin-left: 5px;
-      margin-right: 5px;
-      &:first-of-type {
-        margin-left: 0;
-        margin-right: 10px;
-      }
-      &:last-of-type {
-        margin-left: 10px;
-        margin-right: 0;
-      }
-      >a {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
-        display: block;
-      }
-    }
-    &.layout-2 {
-      >div {
-        width: calc(50% - 10px);
-        figure {
-          position: relative;
-          figcaption {
-            position: absolute;
-            left: 48px;
-            top: calc(66.66667% - 48px);
-            display: flex;
-            align-items: flex-end;
-            width: 75%;
-            height: 33.33333%;
-            text-align: left;
-            padding: 20px;
-          }
-        }
-      }
-    }
-    &.layout-3 {
-      >div {
-        width: calc(33.33% - 10px);
-        figure {
-          img {
-            max-height: 650px;
-          }
-        }
-      }
-    }
-    &.layout-4 {
-      >div {
-        width: calc(25% - 10px);
-      }
-    }
-    figure {
-      height: 700px;
-      img {
-        width: 100%;
-        height: auto;
-        &.width-bigger {
-          width: auto;
-          height: 100%;
-        }
-      }
-      figcaption {
-        h1 {
-          text-align: left;
-          font-weight: bold;
-          font-size: 24px;
-          color: #111;
-        }
-        a {
-          display: inline-block;
-          margin-top: 10px;
-          padding: 8px 28px;
-          border-radius: 20px;
-          background: #111;
-          color: #fff;
-          font-size: 16px;
-          font-weight: bold;
-        }
-        &.w {
-          h1 {
-            color: #fff;
-          }
-          a {
-            background: #fff;
-            color: #111;
-          }
-        }
-      }
-    }
-  }
-}
-
 .banner {
   position: relative;
   overflow: hidden;
   height: 240px;
   .cover {
-    >a {
+    > a {
       position: absolute;
       left: 0;
       right: 0;
