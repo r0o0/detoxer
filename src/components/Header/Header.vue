@@ -13,7 +13,7 @@
         CSearch
         i.el-icon-shopping-cart-2.i-cart
         el-button(v-if="!isUser" plain @click="triggerDialog") 회원가입
-        CUserNav(v-else v-bind:role="isUser.role" v-bind:name="isUser.name")
+        CUserNav(v-else :role="isUser.role" :name="isUser.name ? isUser.name : isUser")
 </template>
 
 <script>
@@ -43,21 +43,20 @@ export default {
   },
   computed: {
     ...mapGetters(['getUser']),
-    isUser () {
-      const userExist = isCookieExist('user')
-      const name = decodeURIComponent(getCookie('user'))
-      if (userExist) this.user = { name }
-      if (this.getUser) {
-        this.user = {
-          ...this.getUser
-        }
+    isUser: {
+      get () {
+        return this.user
+      },
+      set (newValue) {
+        if (newValue) this.user = newValue
       }
-      return this.user
     }
   },
   watch: {
     getUser () {
       if (!this.getUser) this.user = null
+      console.log('watch', this.getUser)
+      this.isUser = { ...this.getUser }
     }
   },
   methods: {
@@ -69,10 +68,16 @@ export default {
     },
     triggerDialog: function () {
       this.setTrigger(true)
+    },
+    getUserFromCookie: function () {
+      const userExist = isCookieExist('user')
+      const name = decodeURIComponent(getCookie('user'))
+      if (userExist) this.isUser = name
     }
   },
   created () {
     this.screenWidth()
+    this.getUserFromCookie()
   },
   destroyed () {
     this.screenWidth()

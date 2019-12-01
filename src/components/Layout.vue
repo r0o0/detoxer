@@ -2,16 +2,20 @@
   #app-layout
     el-container
       el-aside(width="200px")
-        CMypageMenu
+        CSideMenu(:menuList="menuList" :parentPath="parentPath")
       el-main
         router-view
 </template>
 
 <script>
-import CMypageMenu from './Mypage/MyPageMenu'
+import CSideMenu from './SideMenu'
 export default {
+  props: {
+    parentPath: String,
+    menuList: Array
+  },
   components: {
-    CMypageMenu
+    CSideMenu
   }
 }
 </script>

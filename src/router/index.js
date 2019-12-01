@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { home } from './_home'
-import { mypage } from './_my'
+import { my } from './_my'
+import { admin } from './_admin'
 // import { write } from './_write'
 
 Vue.use(Router)
@@ -13,7 +14,8 @@ export default new Router({
     // home
     home,
     // my
-    mypage
+    admin,
+    my
     // admin
     // write
   ]
