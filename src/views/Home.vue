@@ -10,7 +10,6 @@
 <script>
 import List from '@/components/List/List.vue'
 import Banner from '@/components/List/Banner.vue'
-
 export default {
   name: 'home',
   data () {
@@ -78,5 +77,4 @@ export default {
   height: 700px;
   background: pink;
 }
-
 </style>
