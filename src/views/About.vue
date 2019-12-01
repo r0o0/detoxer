@@ -1,7 +1,5 @@
 <template lang="pug">
-  .about
-    el-container.c-container
-      el-main.c-main 리스트
+  el-main.about 어바웃
 </template>
 
 <style lang="scss">
