@@ -13,27 +13,25 @@
 
 <script>
 export default {
-  name: "Banner",
+  name: 'Banner',
   props: {
     data: Object
   },
-  data() {
-    return {};
+  data () {
+    return {}
   }
-  // created () {
-  //   const imgs = this.$el.querySelectorAll('img')
-  //   imgs.forEach(img => {
-  //     if (img.clientWidth > img.clientHeight) {
-  //       img.className += 'width-bigger'
-  //     }
-  //   })
-  // }
-};
+}
 </script>
 
 <style lang="scss" scope>
 .banner {
+  position: relative;
+  overflow: hidden;
+  height: 240px;
   margin-top: 40px;
+  &:first-of-type {
+    margin-top: 0;
+  }
   > h1 {
     color: #111;
     font-size: 24px;
@@ -41,16 +39,6 @@ export default {
     text-align: left;
     margin-bottom: 20px;
   }
-}
-
-.banner:first-of-type {
-  margin-top: 0;
-}
-
-.banner {
-  position: relative;
-  overflow: hidden;
-  height: 240px;
   .cover {
     > a {
       position: absolute;
@@ -64,12 +52,7 @@ export default {
     figure {
       position: relative;
       img {
-        width: auto;
-        height: 100%;
-        &.width-bigger {
-          width: 100%;
-          height: auto;
-        }
+        width: 100%;
       }
       figcaption {
         position: absolute;

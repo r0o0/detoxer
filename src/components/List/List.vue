@@ -4,17 +4,17 @@
     .cover(v-bind:class="classname")
       div(v-for="(list, index) in data" v-bind:key="index")
         a(v-bind:to="list.link")
-        figure(v-bind:style="`height: ${customHeight}px;`")
-          img(v-bind:alt="list.title" v-bind:src="list.url" )
+        figure(v-bind:style="customHeight ? `height: ${customHeight}px;`: 'height: 600px;'")
+          img(v-bind:alt="list.title" v-bind:src="list.url")
           figcaption(v-bind:class="fontColor")
             div
-              h1 {{list.title}}
+              h1 {{customHeight}} {{list.title}}
               a(v-bind:to="list.link" v-show="needBtn") more
 </template>
 
 <script>
 export default {
-  name: "List",
+  name: 'List',
   props: {
     title: String,
     classname: String,
@@ -23,18 +23,19 @@ export default {
     fontColor: String,
     customHeight: String
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
-  created() {
-    const imgs = this.$el.querySelectorAll("img");
+  mounted () {
+    const imgs = this.$el.querySelectorAll('img')
     imgs.forEach(img => {
-      if (img.clientWidth > img.clientHeight) {
-        img.className += "width-bigger";
+      // console.log(img, img.naturalWidth, img.naturalHeight)
+      if (img.naturalWidth > img.naturalHeight) {
+        img.className += 'width-bigger'
       }
-    });
+    })
   }
-};
+}
 </script>
 
 <style lang="scss" scope>
@@ -72,20 +73,29 @@ export default {
         display: block;
       }
     }
-    &.layout-2 {
+    &.layout-2,
+    &.layout-3{
       > div {
-        width: calc(50% - 10px);
         figure {
           position: relative;
           figcaption {
             position: absolute;
-            left: 48px;
-            top: calc(66.66667% - 48px);
             display: flex;
             align-items: flex-end;
+            text-align: left;
+          }
+        }
+      }
+    }
+    &.layout-2 {
+      > div {
+        width: calc(50% - 10px);
+        figure {
+          figcaption {
+            left: 48px;
+            top: calc(66.66667% - 48px);
             width: 75%;
             height: 33.33333%;
-            text-align: left;
             padding: 20px;
           }
         }
@@ -95,8 +105,16 @@ export default {
       > div {
         width: calc(33.33% - 10px);
         figure {
-          img {
-            max-height: 650px;
+          box-sizing: border-box;
+          padding-bottom: 53px;
+          figcaption {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            min-height: 53px;
+            padding: 10px 20px;
+            background: rgba($color: #fff, $alpha: 1);
           }
         }
       }
@@ -132,7 +150,7 @@ export default {
           font-size: 16px;
           font-weight: bold;
         }
-        &.w {
+        &.white {
           h1 {
             color: #fff;
           }
