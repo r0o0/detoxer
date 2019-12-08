@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { home } from './_home'
-import { mypage } from './_my'
+import { my } from './_my'
+import { admin } from './_admin'
 import { list, detail } from './_list'
 // import { write } from './_write'
 
@@ -16,7 +17,8 @@ export default new Router({
     list,
     detail,
     // my
-    mypage
+    admin,
+    my
     // admin
     // write
   ]

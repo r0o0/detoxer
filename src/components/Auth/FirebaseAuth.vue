@@ -26,9 +26,10 @@ export default {
   },
   watch: {
     getTrigger () {
-      if (this.getTrigger)
+      if (this.getTrigger) {
         this.authenticator.reset()
         this.authenticator.start('#firebaseui-auth-container', this.uiConfig)
+      }
     }
   },
   mounted () {

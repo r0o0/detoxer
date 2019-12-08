@@ -1,6 +1,6 @@
 <template lang="pug">
   .mypage
-    h1 마이페이지
+    h1 어드민 패아자
 </template>
 
 <script>
