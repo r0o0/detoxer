@@ -38,7 +38,7 @@ export default {
     return {
       input: '',
       width: 0,
-      user: null
+      userInfo: null
     }
   },
   computed: {

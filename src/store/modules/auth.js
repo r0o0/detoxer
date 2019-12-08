@@ -5,7 +5,6 @@ const state = {
 
 const getters = {
   getUser (state) {
-    console.log('getUser state', state)
     return state.user
   },
   getRequestSignout (state) {
@@ -25,11 +24,9 @@ const mutations = {
 
 const actions = {
   setUser ({ commit }, payload) {
-    console.log('setUser', payload)
     commit('SET_USER', payload)
   },
   requestUserSignout ({ commit }, payload) {
-    console.log('request user signout', payload)
     commit('REQUEST_USER_SIGNOUT', payload)
   }
 }
